@@ -13,13 +13,11 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_NAME:latest .
-      - docker tag $REPOSITORY_NAME:latest $REPOSITORY_URI:latest
-      - docker tag $REPOSITORY_NAME:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t demo-backend .
+      - docker tag demo-backend:latest 714732271094.dkr.ecr.us-east-1.amazonaws.com/demo-backend:latest
   post_build:
     commands:
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push 714732271094.dkr.ecr.us-east-1.amazonaws.com/demo-backend:latest
       - printf '[{"name":"golang-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
