@@ -16,8 +16,6 @@ phases:
       - docker build -t $REPOSITORY_NAME:latest .
       - docker tag $REPOSITORY_NAME:latest $REPOSITORY_URI:latest
       - docker tag $REPOSITORY_NAME:latest $REPOSITORY_URI:$IMAGE_TAG
-  post_build:
-    commands:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - printf '[{"name":"golang-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
